@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>React [RU] Tutorial</title>
+<title>React Date Difference</title>
 <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 <!-- Не используйте это в production -->
@@ -53,13 +53,13 @@
             );
         }
     }
-    const hours = prompt('Введите начальное значение часов времени', 0);
-    const minutes = prompt('Введите начальное значение минут времени', 0 );
-    const seconds = prompt('Введите начальное значение секунд времени', 0);
+    const hours = +prompt('Введите начальное значение часов времени', 0);
+    const minutes = +prompt('Введите начальное значение минут времени', 0 );
+    const seconds = +prompt('Введите начальное значение секунд времени', 0);
 
-    const hours1 = prompt('Введите конечное значение часов времени', 0);
-    const minutes1 = prompt('Введите конечное значение минут времени', 0);
-    const seconds1 = prompt('Введите конечное значение секунд времени', 0);
+    const hours1 = +prompt('Введите конечное значение часов времени', 0);
+    const minutes1 = +prompt('Введите конечное значение минут времени', 0);
+    const seconds1 = +prompt('Введите конечное значение секунд времени', 0);
 
     let dateDiff = (h, m = 0, s = 0, h1, m1 = 0, s1 = 0) => {
         if (h == 0) {
@@ -68,22 +68,15 @@
         if (h1 == 0) {
             h1 = 24;
         }
-        console.log(`${h}:${m}:${s};${h1}:${m1}:${s1}`);
-        const sec = ((h * 60 * 60) + (m * 60) + s) / 10;
-        console.log(sec);
-        const sec1 = ((h1 * 60 * 60) + (m1 * 60) + s1) / 10;
-        console.log(sec1);
+        console.log(`${h}:${m}:${s} ; ${h1}:${m1}:${s1}`);
+        const sec = h * 3600 + m * 60 + s;
+        const sec1 = h1 * 3600 + m1 * 60 + s1;
         let secDiff = Math.abs(sec1 - sec);
-        console.log(secDiff);
         function time(n) {
             let hhFloat = n / 3600;
-            console.log(hhFloat);
             let hh = Math.floor(hhFloat);
-            console.log(hh);
             let mm = Math.floor((hhFloat - hh) * 60);
-            console.log(mm);
             let ss = n - (mm * 60 + hh * 3600);
-            console.log(ss);
             function zero(num) {
             return num > 9 ? num : "0" + num;
             }
