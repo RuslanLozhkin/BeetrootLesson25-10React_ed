@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>React [RU] Tutorial</title>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<!-- Не используйте это в production -->
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<style>
+    html{
+        min-height: 100%;
+        height: 100%;
+    }
+    body{
+        margin: 0;
+        padding: 0;
+        background-color: #333344;
+        width: 100%;
+        min-height: 100%;
+        height: 100%;
+    }
+    #root{
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    class TaskDescribe extends React.Component {
+        render (){
+            let DescribeStyle = {
+                fontFamily: 'sans-serif',
+                fontSize: '24px',
+                letterSpacing: '2px',
+                color: '#3333cc',
+                textIndent: '60px'
+            }
+            return (
+                <div>
+                    <p style = {DescribeStyle}>
+                        Написать функцию, которая считает разницу между датами. 
+                        Функция принимает 6 параметров, которые описывают 2 даты, 
+                        и возвращает результат в виде строки «чч:мм:сс». 
+                        При выполнении задания используйте функции из предыдущих 2-х заданий: 
+                        сначала обе даты переведите в секунды, узнайте разницу в секундах, 
+                        а потом разницу переведите обратно в «чч:мм:сс»
+                    </p>
+                </div>
+            );
+        }
+    }
+    const hours = prompt('Введите начальное значение часов времени', 0);
+    const minutes = prompt('Введите начальное значение минут времени', 0 );
+    const seconds = prompt('Введите начальное значение секунд времени', 0);
+
+    const hours1 = prompt('Введите конечное значение часов времени', 0);
+    const minutes1 = prompt('Введите конечное значение минут времени', 0);
+    const seconds1 = prompt('Введите конечное значение секунд времени', 0);
+
+    let dateDiff = (h, m = 0, s = 0, h1, m1 = 0, s1 = 0) => {
+        if (h == 0) {
+            h = 24;
+        }
+        if (h1 == 0) {
+            h1 = 24;
+        }
+        console.log(`${h}:${m}:${s};${h1}:${m1}:${s1}`);
+        const sec = ((h * 60 * 60) + (m * 60) + s) / 10;
+        console.log(sec);
+        const sec1 = ((h1 * 60 * 60) + (m1 * 60) + s1) / 10;
+        console.log(sec1);
+        let secDiff = Math.abs(sec1 - sec);
+        console.log(secDiff);
+        function time(n) {
+            let hhFloat = n / 3600;
+            console.log(hhFloat);
+            let hh = Math.floor(hhFloat);
+            console.log(hh);
+            let mm = Math.floor((hhFloat - hh) * 60);
+            console.log(mm);
+            let ss = n - (mm * 60 + hh * 3600);
+            console.log(ss);
+            function zero(num) {
+            return num > 9 ? num : "0" + num;
+            }
+            return `${zero(hh)}:${zero(mm)}:${zero(ss)}`;
+        }
+  return time(secDiff);
+};
+    class DateDifference extends React.Component {
+        render () {
+            let DateStyle = {
+                fontFamily: 'sans-serif',
+                fontSize: '60px',
+                color: '#3333ee',
+                textAlign: 'center'
+            }
+            let DateH2Style = {
+                fontFamily: 'sans-serif',
+                fontSize: '40px',
+                textAlign: 'center',
+                color: '#3333ee'
+            }
+            return (
+                <div>
+                    <h2 style = {DateH2Style}>Разница введенного вами времени составляет: </h2>
+                    <p style = {DateStyle}>
+                        {dateDiff(hours, minutes, seconds, hours1, minutes1, seconds1)}
+                    </p>
+                </div>
+            );
+        }
+    }
+    class App extends React.Component {
+        render () {
+            let AppStyle = {
+                width: '800px',
+                height: '500px',
+                dispaly: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'justify',
+                margin: 'auto',
+                backgroundColor: '#333545',
+                padding: '20px'
+            };
+            return (
+                <div className = 'task__wrapper' style = {AppStyle}>
+                    <TaskDescribe />
+                    <DateDifference />
+                </div>
+            );
+        }
+    }
+    ReactDOM.render (
+        <App />,
+        document.querySelector('#root')
+    );
+</script>
+</body>
+</html>
